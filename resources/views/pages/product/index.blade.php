@@ -1,0 +1,96 @@
+
+@extends('layouts.app')
+
+@section('title', 'Product')
+
+@push('style')
+    <!-- CSS Libraries -->
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.7/css/dataTables.bootstrap4.min.css">
+@endpush
+
+@section('main')
+    <div class="main-content">
+        <section class="section">
+            <div class="section-header">
+                <h1>Product</h1>
+                <div class="section-header-button">
+                    <a href="{{ route('product.create') }}" class="btn btn-primary">Add New</a>
+                </div>
+                <div class="section-header-breadcrumb">
+                    <div class="breadcrumb-item"><a href="#">Product</a></div>
+                    <div class="breadcrumb-item">All Product</div>
+                </div>
+            </div>
+
+            <div class="section-body">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                    <table class="table table-striped table-bordered" style="width:100%" id="table-1">
+                                        <thead>
+                                            <tr>
+                                                <th>No</th>
+                                                <th>Name</th>
+                                                <th>Category</th>
+                                                <th>Price</th>
+                                                <th>Stock</th>
+                                                <th>Action</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @foreach ($products as $key => $product)
+                                            <tr>
+                                                <td>{{ $key +1 }}</td>
+                                                <td>{{ $product->name }} </td>
+                                                <td>{{ $product->category->name }}</td>
+                                                <td>{{ number_format($product->price,0,',','.')  }} </td>
+                                                <td>{{ $product->stock }}</td>
+                                                <td>
+                                                    <div class="d-flex justify-content-center">
+                                                        <a href='{{ route('product.edit', $product->id) }}'
+                                                            class="btn btn-sm btn-info btn-icon">
+                                                            <i class="fas fa-edit"></i>
+                                                            Edit
+                                                        </a>
+
+                                                        <form  onsubmit="return confirm('Apakah Anda Yakin ?');" action="{{ route('product.destroy', $product->id) }}" method="POST" class="ml-2">
+                                                            @csrf
+                                                            @method('DELETE')
+                                                            <button type="submit" class="btn btn-sm btn-danger btn-icon confirm-delete">
+                                                                <i class="fas fa-times"></i> Delete
+                                                            </button>
+                                                        </form>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        @endforeach
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+    </div>
+@endsection
+
+@push('scripts')
+    <!-- JS Libraies -->
+
+    <script src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.7/js/dataTables.bootstrap4.min.js"></script>
+
+    <!-- Page Specific JS File -->
+    <script>
+        $("#table-1").dataTable({
+            "columnDefs": [
+                { "sortable": false, "targets": [2,3] }
+            ]
+            });
+    </script>
+@endpush
