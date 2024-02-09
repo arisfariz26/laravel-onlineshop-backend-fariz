@@ -55,8 +55,8 @@
                                                 @if(count($category->product) > 0)
                                                     <tr>
                                                         {{-- <td>{{ $cat +1 }}</td> --}}
-                                                        <td>{{ $cat +1 }}. {{ $category->name }}</td>
-                                                        <td></td>
+                                                        <td class="font-weight-bold">{{ $cat +1 }}. {{ $category->name }}</td>
+                                                        <td class="font-weight-bold">{{ number_format($category->product->sum('price'),0,',','.') }}</td>
                                                         <td></td>
                                                         <td></td>
                                                     </tr>
