@@ -12,8 +12,8 @@ class ProductController extends Controller
     //index
     public function index()
     {
-        $products = Product::latest()->get();
-        return view('pages.product.index', compact('products'));
+        $categories = Category::with('product')->get();
+        return view('pages.product.index', compact('categories'));
     }
 
     //create
