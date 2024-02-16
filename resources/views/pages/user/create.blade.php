@@ -110,8 +110,6 @@
                       </div>
 
 
-
-
                       <div class="form-group row mb-4">
                         <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3"></label>
                         <div class="col-sm-12 col-md-7">
@@ -134,9 +132,4 @@
 <script src="{{ asset('library/summernote/dist/summernote-bs4.js') }}"></script>
 <script src="{{ asset('library/select2/dist/js/select2.full.min.js') }}"></script>
 <script src="{{ asset('library/upload-preview/jquery.uploadPreview.min.js') }}"></script>
-
-<!-- Page Specific JS File -->
-<script src="{{ asset('js/page/features-post-create.js') }}"></script>
-
-
 @endpush
